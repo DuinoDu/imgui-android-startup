@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.6)
-include(FetchContent)
 
 project(ImGuiExample)
 
@@ -7,21 +6,12 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-FetchContent_Populate(imgui
-  URL https://github.com/ocornut/imgui/archive/docking.zip
-  SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/imgui
-)
+include("../../cmake/imgui.cmake")
 
 add_library(${CMAKE_PROJECT_NAME} SHARED
   ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/imgui/imgui.cpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/imgui/imgui_demo.cpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/imgui/imgui_draw.cpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/imgui/imgui_tables.cpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/imgui/imgui_widgets.cpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/imgui/backends/imgui_impl_android.cpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/imgui/backends/imgui_impl_opengl3.cpp
   ${ANDROID_NDK}/sources/android/native_app_glue/android_native_app_glue.c
+  ${IMGUI_SRCS}
 )
 
 set(CMAKE_SHARED_LINKER_FLAGS
