@@ -59,6 +59,8 @@ static int32_t handleInputEvent(struct android_app* app, AInputEvent* inputEvent
 
 void android_main(struct android_app* app)
 {
+    __android_log_print(ANDROID_LOG_INFO, g_LogTag, "======= main =======");
+
     app->onAppCmd = handleAppCmd;
     app->onInputEvent = handleInputEvent;
 
@@ -89,6 +91,7 @@ void android_main(struct android_app* app)
         // Initiate a new frame
         MainLoopStep();
     }
+    __android_log_print(ANDROID_LOG_INFO, g_LogTag, "======= exit =======");
 }
 
 void Init(struct android_app* app)
